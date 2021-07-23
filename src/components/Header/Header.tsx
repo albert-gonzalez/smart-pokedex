@@ -3,20 +3,28 @@ import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { TextInput, View } from "react-native";
 import { colors } from "../../styles/variables";
-import { navigate } from "../Navigation/RootNavigation";
+import { getCurrentRoute, navigate } from "../Navigation/RootNavigation";
 import debounce from "debounce";
 
 export const Header = () => {
   const [searchInputText, setSearchInputText] = useState("");
   const ref: React.MutableRefObject<TextInput> = useRef(null) as any;
 
-  const debouncedChangeSearch = useCallback(
+  const debouncedSearch = useCallback(
     debounce((text: string) => {
+      if (getCurrentRoute() !== "Search") {
+        return;
+      }
+
       navigate("Explore", { params: { search: text }, screen: "Search" });
-      ref.current.focus();
     }, 500),
     []
   );
+
+  const search = (text: string) => {
+    navigate("Explore", { params: { search: text }, screen: "Search" });
+  };
+
   return (
     <View style={styles.bar}>
       <TextInput
@@ -25,8 +33,9 @@ export const Header = () => {
         placeholder="Search Pokémon by number, name or type"
         onChangeText={(text) => {
           setSearchInputText(text);
-          debouncedChangeSearch(text);
+          debouncedSearch(text);
         }}
+        onSubmitEditing={(e) => search(e.nativeEvent.text)}
         value={searchInputText}
       ></TextInput>
     </View>

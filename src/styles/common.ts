@@ -9,13 +9,13 @@ const commonViewStyles = {
 export const commonStyles = StyleSheet.create({
   scrollView: {
     ...commonViewStyles,
-    height: "100%",
+    flex: 1,
   },
   listView: {
     ...commonViewStyles,
     paddingVertical: 0,
     paddingHorizontal: 20,
-    height: "100%",
+    flex: 1,
   },
   view: {
     ...commonViewStyles,
@@ -27,6 +27,6 @@ export const commonStyles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    height: "100%",
+    flex: 1,
   },
 });

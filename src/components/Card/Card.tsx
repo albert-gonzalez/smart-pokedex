@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     shadowOffset: { width: 1, height: 1 },
     shadowColor: colors.shadow,
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
     marginBottom: 30,
   },
 });

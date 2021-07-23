@@ -5,7 +5,12 @@ import React from "react";
 import { useMemo } from "react";
 import { SectionListData, Text } from "react-native";
 import { StyleSheet, View } from "react-native";
-import { mapPokemonToItem } from "../../mappers/pokemon";
+import {
+  filterPokemonByNumAndMapToItem,
+  filterPokemonByTypeAndMapToItem,
+  filterValidPokemonAndMapToItem,
+  mapGenerationsToSections,
+} from "../../mappers/pokemon";
 import { commonStyles } from "../../styles/common";
 import { colors, fontSizes } from "../../styles/variables";
 import { Item, SectionList } from "../List/SectionList";
@@ -32,14 +37,8 @@ export const Search = ({ search }: SearchInput) => {
     navigator.navigate("Pokemon", { pokemon, search: "" });
   };
 
-  const pokemonList = useMemo(
-    () =>
-      pokemonGenerations.map((generation) => ({
-        title: generation.title,
-        data: generation.data.map((pokemon) =>
-          mapPokemonToItem(pokemon, changePokemon)
-        ),
-      })),
+  const allPokemon = useMemo(
+    () => mapGenerationsToSections(pokemonGenerations, changePokemon),
     []
   );
 
@@ -53,29 +52,24 @@ export const Search = ({ search }: SearchInput) => {
   );
 
   if (search.length < 1) {
-    return (
-      <View style={commonStyles.listView}>
-        <SectionList native={true} sections={pokemonList} />
-      </View>
-    );
+    return renderPokemonList(allPokemon);
   }
 
   const numberSearch = parseInt(search);
 
   if (!isNaN(numberSearch)) {
-    const filteredPokemon = [
+    const pokemonByNumber = [
       {
         title: "Results",
-        data: pokemonList
-          .flatMap((generation) => generation.data)
-          .filter((pokemon) => pokemon.value.includes(numberSearch + "")),
+        data: filterPokemonByNumAndMapToItem(
+          pokemonGenerations,
+          numberSearch,
+          changePokemon
+        ),
       },
     ];
-    return (
-      <View style={commonStyles.scrollView}>
-        <SectionList native={true} sections={filteredPokemon} />
-      </View>
-    );
+
+    return renderPokemonList(pokemonByNumber);
   }
 
   if (!called) {
@@ -89,40 +83,40 @@ export const Search = ({ search }: SearchInput) => {
     return (
       <View style={commonStyles.centeredView}>
         <Text style={styles.searchText}>
-          Ops! No Pokémons found. Try another search!
+          Ops! No Pokémon found. Try another search!
         </Text>
       </View>
     );
   if (!data) return <Loading />;
 
-  let pokemonByType: Pokemon[] = [];
+  let pokemonByType: Item[] = [];
 
   if (search.length > 1) {
-    pokemonByType = pokemonGenerations
-      .flatMap((generation) => generation.data)
-      .filter((pokemon) =>
-        pokemon.types
-          .join(", ")
-          .toLocaleLowerCase()
-          .includes(search.toLowerCase())
-      );
+    pokemonByType = filterPokemonByTypeAndMapToItem(
+      pokemonGenerations,
+      search,
+      changePokemon
+    );
   }
-  const list: SectionListData<Item>[] = [
+
+  const queryResultsAndPokemonByType: SectionListData<Item>[] = [
     {
       title: "Results",
-      data: (data.getDexEntries as unknown as Pokemon[])
-        .filter((pokemon) => pokemon.num >= 0 && !pokemon.baseSpecies)
-        .concat(pokemonByType)
-        .map((pokemon) => mapPokemonToItem(pokemon, changePokemon)),
+      data: filterValidPokemonAndMapToItem(
+        data.getDexEntries as unknown as Pokemon[],
+        changePokemon
+      ).concat(pokemonByType),
     },
   ];
 
-  return (
-    <View style={commonStyles.scrollView}>
-      <SectionList native={true} sections={list} />
-    </View>
-  );
+  return renderPokemonList(queryResultsAndPokemonByType);
 };
+
+const renderPokemonList = (pokemon: SectionListData<Item>[]) => (
+  <View style={commonStyles.listView}>
+    <SectionList native={true} sections={pokemon} />
+  </View>
+);
 
 const styles = StyleSheet.create({
   searchText: {

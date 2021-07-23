@@ -3,7 +3,7 @@ import { SectionListData } from "react-native";
 import { mapPokemonToItem } from "../../mappers/pokemon";
 import { Item } from "../List/SectionList";
 
-interface PokemonGeneration {
+export interface PokemonGeneration {
   title: string;
   data: Pokemon[];
 }

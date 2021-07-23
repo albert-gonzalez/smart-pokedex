@@ -1,6 +1,6 @@
 import * as React from "react";
-import { StatusBar, StyleSheet, Text, View } from "react-native";
-import { NavigationContainer, StackActions } from "@react-navigation/native";
+import { StatusBar, StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { client } from "./src/api/apolloClient";
 import { ApolloProvider } from "@apollo/client";
@@ -38,7 +38,7 @@ export default function App() {
           }}
           sceneContainerStyle={{
             backgroundColor: colors.background,
-            height: "100%",
+            flex: 1,
           }}
         >
           <Tab.Screen
