@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { Routes } from "../Navigation/RootNavigation";
+import { Routes } from "../Navigation/routes";
 import { PokemonCard } from "../Pokemon/PokemonCard";
 import { Search } from "./Search";
 

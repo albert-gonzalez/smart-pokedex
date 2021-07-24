@@ -1,6 +1,5 @@
 import React from "react";
-import { FlavorEntry } from "@favware/graphql-pokemon";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { colors } from "../../styles/variables";
 
 export const Card: React.FC = ({ children }) => (

@@ -3,12 +3,9 @@ import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { TextInput, View } from "react-native";
 import { colors } from "../../styles/variables";
-import {
-  getCurrentRoute,
-  navigate,
-  Routes,
-} from "../Navigation/RootNavigation";
+import { getCurrentRoute, navigate } from "../Navigation/rootNavigation";
 import debounce from "debounce";
+import { Routes } from "../Navigation/routes";
 
 export const Header = () => {
   const [searchInputText, setSearchInputText] = useState("");
@@ -36,8 +33,9 @@ export const Header = () => {
   };
 
   return (
-    <View style={styles.bar}>
+    <View testID="header" style={styles.bar}>
       <TextInput
+        testID="headerSearch"
         ref={ref}
         style={styles.input}
         placeholder="Search Pokémon by number, name or type"

@@ -7,12 +7,10 @@ import { ApolloProvider } from "@apollo/client";
 import { colors } from "./src/styles/variables";
 import { Header } from "./src/components/Header/Header";
 import { Explore } from "./src/components/Explore/Explore";
-import {
-  navigationRef,
-  Routes,
-} from "./src/components/Navigation/RootNavigation";
+import { navigationRef } from "./src/components/Navigation/rootNavigation";
 import { Image } from "react-native";
 import { PokemonOfTheDay } from "./src/components/Pokemon/PokemonOfTheDay";
+import { Routes } from "./src/components/Navigation/routes";
 
 function ExploreScreen() {
   return <Explore />;

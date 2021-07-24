@@ -15,14 +15,14 @@ import { commonStyles } from "../../styles/common";
 import { colors, fontSizes } from "../../styles/variables";
 import { Item, SectionList } from "../List/SectionList";
 import { Loading } from "../Loading/Loading";
-import { Routes } from "../Navigation/RootNavigation";
+import { openPokemonScreen } from "../Navigation/rootNavigation";
 import { Pokemon, pokemonGenerations } from "../Pokemon/Data";
 
 interface SearchInput {
   search: string;
 }
 
-const SEARCH_POKEMON = gql`
+export const SEARCH_POKEMON_QUERY = gql`
   query ($search: String!) {
     getDexEntries(pokemon: $search, reverse: true, take: 20) {
       num
@@ -34,17 +34,15 @@ const SEARCH_POKEMON = gql`
 
 export const Search = ({ search }: SearchInput) => {
   const navigator = useNavigation();
-  const changePokemon = (pokemon: number) => {
-    navigator.navigate(Routes.Pokemon, { pokemon, search: "" });
-  };
-
+  const openPokemon = (pokemon: number) =>
+    openPokemonScreen(pokemon, navigator);
   const allPokemon = useMemo(
-    () => mapGenerationsToSections(pokemonGenerations, changePokemon),
+    () => mapGenerationsToSections(pokemonGenerations, openPokemon),
     []
   );
 
   const [searchPokemon, { called, loading, data, error }] = useLazyQuery<Query>(
-    SEARCH_POKEMON,
+    SEARCH_POKEMON_QUERY,
     {
       variables: {
         search,
@@ -65,7 +63,7 @@ export const Search = ({ search }: SearchInput) => {
         data: filterPokemonByNumAndMapToItem(
           pokemonGenerations,
           numberSearch,
-          changePokemon
+          openPokemon
         ),
       },
     ];
@@ -96,7 +94,7 @@ export const Search = ({ search }: SearchInput) => {
     pokemonByType = filterPokemonByTypeAndMapToItem(
       pokemonGenerations,
       search,
-      changePokemon
+      openPokemon
     );
   }
 
@@ -105,7 +103,7 @@ export const Search = ({ search }: SearchInput) => {
       title: "Results",
       data: filterValidPokemonAndMapToItem(
         data.getDexEntries as unknown as Pokemon[],
-        changePokemon
+        openPokemon
       ).concat(pokemonByType),
     },
   ];
@@ -114,7 +112,7 @@ export const Search = ({ search }: SearchInput) => {
 };
 
 const renderPokemonList = (pokemon: SectionListData<Item>[]) => (
-  <View style={commonStyles.listView}>
+  <View testID="search" style={commonStyles.listView}>
     <SectionList native={true} sections={pokemon} />
   </View>
 );

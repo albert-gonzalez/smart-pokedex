@@ -1,10 +1,10 @@
 import React from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { PokemonCard } from "./PokemonCard";
 import { useState } from "react";
 import { Loading } from "../Loading/Loading";
 import { useEffect } from "react";
 import { useIsFocused } from "@react-navigation/native";
+import { getItem, setItem } from "../../storage/storage";
 
 const POKE_DAY_KEY = "@poke_day";
 const MAX_POKEMON_NUMBER = 898;
@@ -33,15 +33,13 @@ export const PokemonOfTheDay = () => {
 const storePokemonOfTheDay = async (num: number) => {
   try {
     const data = JSON.stringify({ num, date: new Date().toDateString() });
-    await AsyncStorage.setItem(POKE_DAY_KEY, data);
-  } catch (e) {
-    // saving error
-  }
+    await setItem(POKE_DAY_KEY, data);
+  } catch (e) {}
 };
 
 const getPokemonOfTheDay = async (): Promise<number> => {
   try {
-    const data = await AsyncStorage.getItem(POKE_DAY_KEY);
+    const data = await getItem(POKE_DAY_KEY);
 
     if (data !== null) {
       const parsedData: PokemonOfTheDayValue = JSON.parse(data);
@@ -55,9 +53,7 @@ const getPokemonOfTheDay = async (): Promise<number> => {
     storePokemonOfTheDay(randomPokemonNum);
 
     return randomPokemonNum;
-  } catch (e) {
-    // error reading value
-  }
+  } catch (e) {}
 
   return -1;
 };

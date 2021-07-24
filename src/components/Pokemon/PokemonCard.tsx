@@ -17,9 +17,11 @@ import { Loading } from "../Loading/Loading";
 import { commonStyles } from "../../styles/common";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { getPokemonData } from "./Data";
-import { Routes } from "../Navigation/RootNavigation";
+import { openPokemonScreen } from "../Navigation/rootNavigation";
 
-const QUERY_FIELDS = `
+export const GET_POKEMON_DETAILS_BY_NUM = gql`
+  query Pokemon($num: Int!) {
+    getPokemonDetailsByNumber(pokemon: $num, skip: 0, take: 4, reverse: true) {
       sprite
       backSprite
       num
@@ -58,19 +60,13 @@ const QUERY_FIELDS = `
         species
         baseSpecies
       }
-`;
-
-const GET_POKEMON_DETAILS_BY_NUM = gql`
-  query Pokemon($num: Int!) {
-    getPokemonDetailsByNumber(pokemon: $num, skip: 0, take: 4, reverse: true) {
-      ${QUERY_FIELDS}
     }
   }
 `;
 
 interface PokemonCardInput {
   title?: string;
-  num?: number;
+  num: number;
 }
 
 export const PokemonCard = ({ num, title }: PokemonCardInput) => {
@@ -82,38 +78,34 @@ export const PokemonCard = ({ num, title }: PokemonCardInput) => {
     ref.current?.scrollTo({ y: 0 });
   }
 
-  const openPokemonScreen = (pokemon: number) =>
-    navigator.push?.(Routes.Pokemon, { pokemon }) ||
-    navigator.navigate(Routes.Explore, {
-      screen: Routes.Pokemon,
-      params: { pokemon },
-    });
-
   const { loading, error, data } = useQuery<Query>(GET_POKEMON_DETAILS_BY_NUM, {
     variables: {
       num,
     },
   });
 
-  if (loading) return <Loading />;
-  if (error)
+  if (loading) {
+    return <Loading />;
+  }
+  if (error) {
     return (
       <View style={commonStyles.centeredView}>
         <Text style={styles.title}>Ops! Pokémon Not Found. Try another!</Text>
       </View>
     );
-  if (!data)
+  }
+  if (!data) {
     return <Text style={commonStyles.scrollView}>Error! Empty Data</Text>;
+  }
 
-  const pokemon = data.getPokemonDetails || data.getPokemonDetailsByNumber;
+  const pokemon = data.getPokemonDetailsByNumber;
 
-  const list: SectionListData<Item>[] = getPokemonData(
-    pokemon,
-    openPokemonScreen
+  const list: SectionListData<Item>[] = getPokemonData(pokemon, (number) =>
+    openPokemonScreen(number, navigator)
   );
 
   return (
-    <ScrollView style={commonStyles.scrollView} ref={ref}>
+    <ScrollView testID="pokemonCard" style={commonStyles.scrollView} ref={ref}>
       {title ? <Text style={styles.title}>{title}</Text> : undefined}
       <View style={styles.view}>
         <View style={styles.imageViewer}>
