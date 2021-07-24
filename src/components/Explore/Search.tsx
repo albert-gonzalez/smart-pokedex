@@ -15,6 +15,7 @@ import { commonStyles } from "../../styles/common";
 import { colors, fontSizes } from "../../styles/variables";
 import { Item, SectionList } from "../List/SectionList";
 import { Loading } from "../Loading/Loading";
+import { Routes } from "../Navigation/RootNavigation";
 import { Pokemon, pokemonGenerations } from "../Pokemon/Data";
 
 interface SearchInput {
@@ -34,7 +35,7 @@ const SEARCH_POKEMON = gql`
 export const Search = ({ search }: SearchInput) => {
   const navigator = useNavigation();
   const changePokemon = (pokemon: number) => {
-    navigator.navigate("Pokemon", { pokemon, search: "" });
+    navigator.navigate(Routes.Pokemon, { pokemon, search: "" });
   };
 
   const allPokemon = useMemo(

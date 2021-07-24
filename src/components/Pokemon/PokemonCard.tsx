@@ -17,6 +17,7 @@ import { Loading } from "../Loading/Loading";
 import { commonStyles } from "../../styles/common";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { getPokemonData } from "./Data";
+import { Routes } from "../Navigation/RootNavigation";
 
 const QUERY_FIELDS = `
       sprite
@@ -82,8 +83,11 @@ export const PokemonCard = ({ num, title }: PokemonCardInput) => {
   }
 
   const openPokemonScreen = (pokemon: number) =>
-    navigator.push?.("Pokemon", { pokemon }) ||
-    navigator.navigate("Explore", { screen: "Pokemon", params: { pokemon } });
+    navigator.push?.(Routes.Pokemon, { pokemon }) ||
+    navigator.navigate(Routes.Explore, {
+      screen: Routes.Pokemon,
+      params: { pokemon },
+    });
 
   const { loading, error, data } = useQuery<Query>(GET_POKEMON_DETAILS_BY_NUM, {
     variables: {

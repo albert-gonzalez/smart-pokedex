@@ -1,5 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
+import { Routes } from "../Navigation/RootNavigation";
 import { PokemonCard } from "../Pokemon/PokemonCard";
 import { Search } from "./Search";
 
@@ -8,8 +9,8 @@ const Stack = createStackNavigator();
 export const Explore = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Search" component={SearchScreen} />
-      <Stack.Screen name="Pokemon" component={PokemonScreen} />
+      <Stack.Screen name={Routes.Search} component={SearchScreen} />
+      <Stack.Screen name={Routes.Pokemon} component={PokemonScreen} />
     </Stack.Navigator>
   );
 };

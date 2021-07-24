@@ -7,7 +7,10 @@ import { ApolloProvider } from "@apollo/client";
 import { colors } from "./src/styles/variables";
 import { Header } from "./src/components/Header/Header";
 import { Explore } from "./src/components/Explore/Explore";
-import { navigationRef } from "./src/components/Navigation/RootNavigation";
+import {
+  navigationRef,
+  Routes,
+} from "./src/components/Navigation/RootNavigation";
 import { Image } from "react-native";
 import { PokemonOfTheDay } from "./src/components/Pokemon/PokemonOfTheDay";
 
@@ -42,7 +45,7 @@ export default function App() {
           }}
         >
           <Tab.Screen
-            name="PokemonOfTheDay"
+            name={Routes.PokemonOfTheDay}
             component={PokemonOfTheDayScreen}
             options={{
               tabBarIcon: ({ focused }) => (
@@ -58,7 +61,7 @@ export default function App() {
             }}
           />
           <Tab.Screen
-            name="Explore"
+            name={Routes.Explore}
             component={ExploreScreen}
             options={{
               tabBarIcon: ({ focused }) => (

@@ -3,7 +3,11 @@ import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { TextInput, View } from "react-native";
 import { colors } from "../../styles/variables";
-import { getCurrentRoute, navigate } from "../Navigation/RootNavigation";
+import {
+  getCurrentRoute,
+  navigate,
+  Routes,
+} from "../Navigation/RootNavigation";
 import debounce from "debounce";
 
 export const Header = () => {
@@ -12,17 +16,23 @@ export const Header = () => {
 
   const debouncedSearch = useCallback(
     debounce((text: string) => {
-      if (getCurrentRoute() !== "Search") {
+      if (getCurrentRoute() !== Routes.Search) {
         return;
       }
 
-      navigate("Explore", { params: { search: text }, screen: "Search" });
+      navigate(Routes.Explore, {
+        params: { search: text },
+        screen: Routes.Search,
+      });
     }, 500),
     []
   );
 
   const search = (text: string) => {
-    navigate("Explore", { params: { search: text }, screen: "Search" });
+    navigate(Routes.Explore, {
+      params: { search: text },
+      screen: Routes.Search,
+    });
   };
 
   return (
