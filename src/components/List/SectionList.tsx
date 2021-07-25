@@ -25,6 +25,7 @@ interface SectionListInput {
 export const SectionList = ({ sections, native }: SectionListInput) => {
   return native ? (
     <NativeSectionList
+      testID="list"
       sections={sections}
       keyExtractor={(item, index) => index + ""}
       renderItem={({ item, index }) => <Item item={item} index={index} />}
@@ -39,7 +40,7 @@ export const SectionList = ({ sections, native }: SectionListInput) => {
 };
 
 const ViewList = ({ sections }: { sections: SectionListData<Item>[] }) => (
-  <View>
+  <View testID="list">
     {sections
       .filter((section) => section.data.length)
       .map((section) => (

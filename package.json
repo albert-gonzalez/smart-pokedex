@@ -6,7 +6,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest"
+    "test": "jest",
+    "e2e:open": "cypress open",
+    "e2e:run": "cypress run"
   },
   "dependencies": {
     "@apollo/client": "^3.3.21",
@@ -23,6 +25,7 @@
     "@types/jest": "^26.0.24",
     "@types/react": "~17.0.14",
     "@types/react-native": "~0.64.12",
+    "cypress": "^8.0.0",
     "debounce": "^1.2.1",
     "expo": "~42.0.3",
     "expo-status-bar": "~1.0.4",

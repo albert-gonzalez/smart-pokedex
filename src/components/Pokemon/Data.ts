@@ -23,12 +23,12 @@ export const getPokemonData = (
     {
       title: "General",
       data: [
-        { field: "num", value: pokemon.num },
-        { field: "name", value: pokemon.species },
-        { field: "color", value: pokemon.color },
-        { field: "height", value: `${pokemon.height} meters` },
-        { field: "weight", value: `${pokemon.weight} Kg.` },
-        { field: "types", value: pokemon.types.join(", ") },
+        { field: "Number", value: pokemon.num },
+        { field: "Name", value: pokemon.species },
+        { field: "Color", value: pokemon.color },
+        { field: "Height", value: `${pokemon.height} meters` },
+        { field: "Weight", value: `${pokemon.weight} Kg.` },
+        { field: "Types", value: pokemon.types.join(", ") },
       ],
     },
     {
@@ -67,15 +67,15 @@ export const getPokemonData = (
       data: [
         { field: "First", value: pokemon.abilities.first },
         {
-          field: "second",
+          field: "Second",
           value: pokemon.abilities.second as string,
         },
         {
-          field: "special",
+          field: "Special",
           value: pokemon.abilities.special as string,
         },
         {
-          field: "hidden",
+          field: "Hidden",
           value: pokemon.abilities.hidden as string,
         },
       ],

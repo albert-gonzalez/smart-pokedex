@@ -46,6 +46,7 @@ export default function App() {
             name={Routes.PokemonOfTheDay}
             component={PokemonOfTheDayScreen}
             options={{
+              tabBarTestID: "tabPokemonOfTheDay",
               tabBarIcon: ({ focused }) => (
                 <Image
                   style={styles.icon}
@@ -62,6 +63,7 @@ export default function App() {
             name={Routes.Explore}
             component={ExploreScreen}
             options={{
+              tabBarTestID: "tabExplore",
               tabBarIcon: ({ focused }) => (
                 <Image
                   style={styles.icon}

@@ -106,13 +106,19 @@ export const PokemonCard = ({ num, title }: PokemonCardInput) => {
 
   return (
     <ScrollView testID="pokemonCard" style={commonStyles.scrollView} ref={ref}>
-      {title ? <Text style={styles.title}>{title}</Text> : undefined}
+      {title ? (
+        <Text testID="title" style={styles.title}>
+          {title}
+        </Text>
+      ) : undefined}
       <View style={styles.view}>
-        <View style={styles.imageViewer}>
+        <View testID="imageViewer" style={styles.imageViewer}>
           <Image style={styles.image} source={{ uri: pokemon.sprite }} />
           <Image style={styles.image} source={{ uri: pokemon.backSprite }} />
         </View>
-        <Text style={styles.species}>{getNameWithNum(pokemon)}</Text>
+        <Text testID="species" style={styles.species}>
+          {getNameWithNum(pokemon)}
+        </Text>
         <FlavorTexts flavorTexts={pokemon.flavorTexts} />
       </View>
       <SectionList sections={list} />
