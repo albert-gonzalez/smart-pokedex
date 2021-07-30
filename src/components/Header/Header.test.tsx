@@ -22,8 +22,6 @@ describe("Header", () => {
 
     const headerSearch = getByTestId("headerSearch");
 
-    fireEvent.changeText(headerSearch, "Pikachu");
-
     fireEvent(headerSearch, "submitEditing", {
       nativeEvent: { text: "Pikachu" },
     });

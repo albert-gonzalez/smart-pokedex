@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { TextInput, View } from "react-native";
@@ -9,9 +9,27 @@ import { Routes } from "../Navigation/routes";
 
 export const Header = () => {
   const [searchInputText, setSearchInputText] = useState("");
-  const ref: React.MutableRefObject<TextInput> = useRef(null) as any;
+  const ref: React.MutableRefObject<HTMLElement & TextInput> = useRef(
+    null
+  ) as any;
 
-  const debouncedSearch = useCallback(
+  useEffect(() => {
+    if (!ref.current?.addEventListener) {
+      return;
+    }
+
+    const searchOnEnter = (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        debouncedOnSubmitSearch((e.currentTarget as any)?.value);
+      }
+    };
+
+    ref.current.addEventListener("keydown", searchOnEnter);
+
+    return () => ref.current.removeEventListener("keydown", searchOnEnter);
+  }, [ref]);
+
+  const debouncedOnChangeSearch = useCallback(
     debounce((text: string) => {
       if (getCurrentRoute() !== Routes.Search) {
         return;
@@ -25,12 +43,21 @@ export const Header = () => {
     []
   );
 
-  const search = (text: string) => {
-    navigate(Routes.Explore, {
-      params: { search: text },
-      screen: Routes.Search,
-    });
-  };
+  const debouncedOnSubmitSearch = useCallback(
+    debounce(
+      (text: string) => {
+        console.log("eiii");
+
+        navigate(Routes.Explore, {
+          params: { search: text },
+          screen: Routes.Search,
+        });
+      },
+      10,
+      true
+    ),
+    []
+  );
 
   return (
     <View testID="header" style={styles.bar}>
@@ -41,9 +68,9 @@ export const Header = () => {
         placeholder="Search Pokémon by number, name or type"
         onChangeText={(text) => {
           setSearchInputText(text);
-          debouncedSearch(text);
+          debouncedOnChangeSearch(text);
         }}
-        onSubmitEditing={(e) => search(searchInputText)}
+        onSubmitEditing={(e) => debouncedOnSubmitSearch(e.nativeEvent.text)}
         autoCorrect={false}
         autoCompleteType="off"
         returnKeyType="search"
