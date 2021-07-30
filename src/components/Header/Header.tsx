@@ -45,6 +45,7 @@ export const Header = () => {
         }}
         onSubmitEditing={(e) => search(e.nativeEvent.text)}
         autoCorrect={false}
+        autoCompleteType="off"
         value={searchInputText}
       ></TextInput>
     </View>
