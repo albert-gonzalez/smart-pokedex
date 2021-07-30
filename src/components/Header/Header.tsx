@@ -44,7 +44,7 @@ export const Header = () => {
           debouncedSearch(text);
         }}
         onSubmitEditing={(e) => search(e.nativeEvent.text)}
-        blurOnSubmit={false}
+        autoCorrect={false}
         value={searchInputText}
       ></TextInput>
     </View>
