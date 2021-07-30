@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from "react";
 import { useState } from "react";
-import { Keyboard, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { TextInput, View } from "react-native";
 import { colors } from "../../styles/variables";
 import { getCurrentRoute, navigate } from "../Navigation/rootNavigation";
@@ -26,7 +26,6 @@ export const Header = () => {
   );
 
   const search = (text: string) => {
-    Keyboard.dismiss();
     navigate(Routes.Explore, {
       params: { search: text },
       screen: Routes.Search,
@@ -44,7 +43,7 @@ export const Header = () => {
           setSearchInputText(text);
           debouncedSearch(text);
         }}
-        onSubmitEditing={(e) => search(e.nativeEvent.text)}
+        onSubmitEditing={(e) => search(searchInputText)}
         autoCorrect={false}
         autoCompleteType="off"
         returnKeyType="search"
