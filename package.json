@@ -33,7 +33,7 @@
     "expo-cli": "^4.9.1",
     "expo-status-bar": "~1.0.4",
     "graphql": "^15.5.1",
-    "jest": "^26.6.3s",
+    "jest": "^26.6.3",
     "mockdate": "^3.0.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",
