@@ -9,8 +9,10 @@
     "build:web": "expo build:web",
     "eject": "expo eject",
     "test": "jest",
+    "e2e:build": "expo build:web -c && rsync -avr web-build/ web-build/smart-pokedex",
     "e2e:open": "cypress open",
-    "e2e:run": "cypress run"
+    "e2e:run": "cypress run",
+    "e2e:serve": "npx serve web-build"
   },
   "dependencies": {
     "@apollo/client": "^3.3.21",
