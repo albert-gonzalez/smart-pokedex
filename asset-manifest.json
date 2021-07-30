@@ -1,7 +1,7 @@
 {
   "files": {
-    "app.js": "/smart-pokedex/static/js/app.c98f2d5e.chunk.js",
-    "app.js.map": "/smart-pokedex/static/js/app.c98f2d5e.chunk.js.map",
+    "app.js": "/smart-pokedex/static/js/app.6fa2df9a.chunk.js",
+    "app.js.map": "/smart-pokedex/static/js/app.6fa2df9a.chunk.js.map",
     "runtime~app.js": "/smart-pokedex/static/js/runtime~app.9bd18290.js",
     "runtime~app.js.map": "/smart-pokedex/static/js/runtime~app.9bd18290.js.map",
     "static/js/2.af4386d6.chunk.js": "/smart-pokedex/static/js/2.af4386d6.chunk.js",
@@ -22,6 +22,6 @@
   "entrypoints": [
     "static/js/runtime~app.9bd18290.js",
     "static/js/2.af4386d6.chunk.js",
-    "static/js/app.c98f2d5e.chunk.js"
+    "static/js/app.6fa2df9a.chunk.js"
   ]
 }
