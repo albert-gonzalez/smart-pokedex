@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from "react";
 import { useState } from "react";
-import { StyleSheet } from "react-native";
+import { Keyboard, StyleSheet } from "react-native";
 import { TextInput, View } from "react-native";
 import { colors } from "../../styles/variables";
 import { getCurrentRoute, navigate } from "../Navigation/rootNavigation";
@@ -26,6 +26,7 @@ export const Header = () => {
   );
 
   const search = (text: string) => {
+    Keyboard.dismiss();
     navigate(Routes.Explore, {
       params: { search: text },
       screen: Routes.Search,
