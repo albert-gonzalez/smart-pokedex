@@ -1,10 +1,12 @@
 {
   "expo": {
-    "name": "smart-pokedex",
+    "name": "Smart Pokédex",
+    "description": "Find you favorite Pokémon with this Pokédex",
     "slug": "smart-pokedex",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "backgroundColor": "#cc0d2d",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -24,7 +26,8 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "themecolor": "#dc0a2d"
     }
   }
 }
