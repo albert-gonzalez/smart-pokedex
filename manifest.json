@@ -1,9 +1,10 @@
 {
   "background_color": "#cc0d2d",
+  "description": "Find you favorite Pokémon with this Pokédex",
   "display": "standalone",
   "lang": "en",
-  "name": "smart-pokedex",
-  "short_name": "smart-pokedex",
+  "name": "Smart Pokédex",
+  "short_name": "Smart Pokédex",
   "start_url": "/?utm_source=web_app_manifest",
   "orientation": "portrait",
   "icons": [
