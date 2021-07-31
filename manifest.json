@@ -6,6 +6,7 @@
   "name": "Smart Pokédex",
   "short_name": "Smart Pokédex",
   "start_url": "/?utm_source=web_app_manifest",
+  "theme_color": "#dc0a2d",
   "orientation": "portrait",
   "icons": [
     {
