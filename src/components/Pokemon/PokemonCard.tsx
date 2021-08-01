@@ -1,10 +1,12 @@
-import * as React from "react";
+import React, { useState } from "react";
 import {
   Image,
   ScrollView,
   SectionListData,
   StyleSheet,
   Text,
+  TextStyle,
+  TouchableHighlight,
   View,
 } from "react-native";
 import { useQuery, gql } from "@apollo/client";
@@ -18,12 +20,15 @@ import { commonStyles } from "../../styles/common";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { getPokemonData } from "./Data";
 import { openPokemonScreen } from "../Navigation/rootNavigation";
+import { useEffect } from "react";
 
 export const GET_POKEMON_DETAILS_BY_NUM = gql`
   query Pokemon($num: Int!) {
     getPokemonDetailsByNumber(pokemon: $num, skip: 0, take: 4, reverse: true) {
       sprite
       backSprite
+      shinySprite
+      shinyBackSprite
       num
       species
       baseSpecies
@@ -73,6 +78,7 @@ export const PokemonCard = ({ num, title }: PokemonCardInput) => {
   const navigator = useNavigation() as any;
   const ref: React.MutableRefObject<ScrollView> = React.useRef(null) as any;
   const isFocused = useIsFocused();
+  const [normalImageSelected, setNormalImageSelected] = useState(true);
 
   if (!isFocused) {
     ref.current?.scrollTo({ y: 0 });
@@ -113,8 +119,52 @@ export const PokemonCard = ({ num, title }: PokemonCardInput) => {
       ) : undefined}
       <View style={styles.view}>
         <View testID="imageViewer" style={styles.imageViewer}>
-          <Image style={styles.image} source={{ uri: pokemon.sprite }} />
-          <Image style={styles.image} source={{ uri: pokemon.backSprite }} />
+          <Image
+            testID="image"
+            style={styles.image}
+            source={{
+              uri: normalImageSelected ? pokemon.sprite : pokemon.shinySprite,
+            }}
+          />
+          <Image
+            testID="backImage"
+            style={styles.image}
+            source={{
+              uri: normalImageSelected
+                ? pokemon.backSprite
+                : pokemon.shinyBackSprite,
+            }}
+          />
+        </View>
+        <View style={styles.imageButtons}>
+          <TouchableHighlight
+            testID="normalImageButton"
+            underlayColor="rgba(255, 255, 255, 0.2)"
+            onPress={() => setNormalImageSelected(true)}
+          >
+            <Text
+              style={[
+                styles.normalImageButton,
+                normalImageSelected ? styles.selectedButton : {},
+              ]}
+            >
+              Normal
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            testID="shinyImageButton"
+            underlayColor="rgba(255, 255, 255, 0.2)"
+            onPress={() => setNormalImageSelected(false)}
+          >
+            <Text
+              style={[
+                styles.shinyImageButton,
+                !normalImageSelected ? styles.selectedButton : {},
+              ]}
+            >
+              Shiny
+            </Text>
+          </TouchableHighlight>
         </View>
         <Text testID="species" style={styles.species}>
           {getNameWithNum(pokemon)}
@@ -124,6 +174,19 @@ export const PokemonCard = ({ num, title }: PokemonCardInput) => {
       <SectionList sections={list} />
     </ScrollView>
   );
+};
+
+const imageButtonStyles: TextStyle = {
+  padding: 10,
+  backgroundColor: "rgba(255, 255, 255, .1)",
+  shadowOffset: { width: 2, height: 2 },
+  shadowColor: colors.shadow,
+  borderWidth: 1,
+  borderColor: colors.text,
+  width: 140,
+  textAlign: "center",
+  fontSize: fontSizes.m,
+  color: colors.text,
 };
 
 const styles = StyleSheet.create({
@@ -148,6 +211,23 @@ const styles = StyleSheet.create({
     height: 80,
     resizeMode: "contain",
     margin: 20,
+  },
+  imageButtons: {
+    flexDirection: "row",
+    marginBottom: 20,
+  },
+  normalImageButton: {
+    ...imageButtonStyles,
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+  },
+  shinyImageButton: {
+    ...imageButtonStyles,
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5,
+  },
+  selectedButton: {
+    backgroundColor: "rgba(255, 255, 255, .25)",
   },
   title: {
     color: colors.text,

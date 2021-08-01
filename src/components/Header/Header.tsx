@@ -46,8 +46,6 @@ export const Header = () => {
   const debouncedOnSubmitSearch = useCallback(
     debounce(
       (text: string) => {
-        console.log("eiii");
-
         navigate(Routes.Explore, {
           params: { search: text },
           screen: Routes.Search,

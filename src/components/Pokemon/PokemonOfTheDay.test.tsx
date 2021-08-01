@@ -36,10 +36,11 @@ describe("PokemonOfTheDay", () => {
         data: {
           getPokemonDetailsByNumber: {
             __typename: "DexDetails",
-            sprite: "https://play.pokemonshowdown.com/sprites/ani/pikachu.gif",
-            backSprite:
-              "https://play.pokemonshowdown.com/sprites/ani-back/pikachu.gif",
+            sprite: "sprite.jpg",
+            backSprite: "backSprite.jpg",
             num: 25,
+            shinySprite: "shinySprite.jpg",
+            shinyBackSprite: "shinyBackSprite.jpg",
             species: "pikachu",
             baseSpecies: null,
             color: "Yellow",

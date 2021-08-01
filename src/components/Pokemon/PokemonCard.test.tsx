@@ -32,6 +32,8 @@ describe("PokemonCard", () => {
             __typename: "DexDetails",
             sprite: "sprite.jpg",
             backSprite: "backSprite.jpg",
+            shinySprite: "shinySprite.jpg",
+            shinyBackSprite: "shinyBackSprite.jpg",
             num: 25,
             species: "pikachu",
             baseSpecies: null,
@@ -136,13 +138,14 @@ describe("PokemonCard", () => {
     await waitFor(() => expect(getByTestId("pokemonCard")).toBeTruthy());
 
     expect(getByText("When Pikachu meet..."));
+    expectImages(getByTestId, ["sprite.jpg", "backSprite.jpg"]);
     expectGeneralValues(getByText);
     expectStats(getByText);
     expectAbilities(getByText);
     expectEvolutions(getByText);
   });
 
-  test("navigates when clicking on an evolution", async () => {
+  test("navigates when clicking an evolution", async () => {
     const { getByTestId, getByText } = renderPokemonCard();
 
     await waitFor(() => expect(getByTestId("pokemonCard")).toBeTruthy());
@@ -152,7 +155,29 @@ describe("PokemonCard", () => {
     fireEvent.press(evolution);
     expect(openPokemonScreen).toBeCalledWith(26, expect.anything());
   });
+
+  test("changes to shiny images when clicking shiny button and back to normal images when clicking normal button", async () => {
+    const { getByTestId, getByText } = renderPokemonCard();
+
+    await waitFor(() => expect(getByTestId("pokemonCard")).toBeTruthy());
+
+    const shinyButton = getByTestId("shinyImageButton");
+    const normalButton = getByTestId("normalImageButton");
+
+    fireEvent.press(shinyButton);
+
+    expectImages(getByTestId, ["shinySprite.jpg", "shinyBackSprite.jpg"]);
+
+    fireEvent.press(normalButton);
+
+    expectImages(getByTestId, ["sprite.jpg", "backSprite.jpg"]);
+  });
 });
+
+const expectImages = async (getByTestId: any, [front, back]: string[]) => {
+  expect(getByTestId("image").props.source.uri).toEqual(front);
+  expect(getByTestId("backImage").props.source.uri).toEqual(back);
+};
 
 const expectGeneralValues = (getByText: any) => {
   expect(getByText("25")).toBeTruthy();
