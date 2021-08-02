@@ -25,6 +25,7 @@ describe("Pokémon Card", () => {
     assertGeneralData();
     assertStats();
     assertAbilities();
+    assertEggGroups();
   });
 
   it("shows shiny sprite when clicking shiny button and shows again normal sprite when clicking normal button", () => {
@@ -63,28 +64,51 @@ const assertImages = ([frontImage, backImage]: RegExp[]) => {
 };
 
 const assertGeneralData = () => {
-  assertItem("Number", "4");
-  assertItem("Name", "charmander");
-  assertItem("Color", "Red");
-  assertItem("Height", "0.6 meters");
-  assertItem("Weight", "8.5 Kg.");
-  assertItem("Types", "Fire");
+  const title = "General";
+
+  assertItem(title, "Name", "charmander");
+  assertItem(title, "Number", "4");
+  assertItem(title, "Color", "Red");
+  assertItem(title, "Height", "0.6 meters");
+  assertItem(title, "Weight", "8.5 Kg.");
+  assertItem(title, "Types", "Fire");
 };
 
 const assertStats = () => {
-  assertItem("HP", "39");
-  assertItem("Attack", "52");
-  assertItem("Defense", "43");
-  assertItem("Speed", "65");
-  assertItem("Special Attack", "60");
-  assertItem("Special Defense", "50");
-  assertItem("Total", "309");
+  const title = "Stats";
+
+  assertItem(title, "HP", "39");
+  assertItem(title, "Attack", "52");
+  assertItem(title, "Defense", "43");
+  assertItem(title, "Speed", "65");
+  assertItem(title, "Special Attack", "60");
+  assertItem(title, "Special Defense", "50");
+  assertItem(title, "Total", "309");
 };
 
 const assertAbilities = () => {
-  assertItem("First", "Blaze");
-  assertItem("Hidden", "Solar Power");
+  const title = "Abilities";
+
+  assertItem(title, "First", "Blaze");
+  assertItem(title, "Hidden", "Solar Power");
 };
 
-const assertItem = (field: string, value: string) =>
-  cy.get(LIST).contains(field).siblings().contains(value).should("exist");
+const assertEggGroups = () => {
+  const title = "Egg Groups";
+
+  assertValue(title, "Monster");
+  assertValue(title, "Dragon");
+};
+
+const assertItem = (title: string, field: string, value: string) =>
+  cy
+    .get(LIST)
+    .contains(title)
+    .siblings()
+    .contains(field)
+    .siblings()
+    .contains(value)
+    .should("exist");
+
+const assertValue = (title: string, value: string) =>
+  cy.get(LIST).contains(title).siblings().contains(value).should("exist");

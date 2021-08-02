@@ -81,6 +81,13 @@ export const getPokemonData = (
       ],
     },
     {
+      title: "Egg Groups",
+      data:
+        pokemon.eggGroups?.map((egg) => ({
+          value: egg,
+        })) || [],
+    },
+    {
       title: "Pre-Evolutions",
       data: getPreEvolutions(pokemon, openPokemonScreen),
     },

@@ -10,6 +10,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 import { openPokemonScreen } from "../Navigation/rootNavigation";
+import { mocks } from "../../api/mockData";
 
 jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper");
 jest.mock("react-native/Libraries/LogBox/LogBox");
@@ -18,98 +19,6 @@ jest.mock("../Navigation/rootNavigation.ts");
 describe("PokemonCard", () => {
   const pokemonScreen = () => <PokemonCard num={25} />;
   const Tab = createBottomTabNavigator();
-  const mocks: MockedResponse<any>[] = [
-    {
-      request: {
-        query: GET_POKEMON_DETAILS_BY_NUM,
-        variables: {
-          num: 25,
-        },
-      },
-      result: {
-        data: {
-          getPokemonDetailsByNumber: {
-            __typename: "DexDetails",
-            sprite: "sprite.jpg",
-            backSprite: "backSprite.jpg",
-            shinySprite: "shinySprite.jpg",
-            shinyBackSprite: "shinyBackSprite.jpg",
-            num: 25,
-            species: "pikachu",
-            baseSpecies: null,
-            color: "Yellow",
-            weight: 6,
-            height: 0.4,
-            types: ["Electric", "Other"],
-            abilities: {
-              __typename: "AbilitiesEntry",
-              first: "Static",
-              second: null,
-              special: null,
-              hidden: "Lightning Rod",
-            },
-            flavorTexts: [
-              {
-                __typename: "FlavorEntry",
-                flavor: "When Pikachu meet...",
-                game: "Shield",
-              },
-              {
-                __typename: "FlavorEntry",
-                flavor:
-                  "Pikachu that can generate powerful electricity have cheek sacs that are extra soft and super stretchy.",
-                game: "Sword",
-              },
-              {
-                __typename: "FlavorEntry",
-                flavor:
-                  "This forest-dwelling Pokémon stores electricity in its cheeks, so you'll feel a tingly shock if you touch it.",
-                game: "Let's Go Eevee",
-              },
-              {
-                __typename: "FlavorEntry",
-                flavor:
-                  "This forest-dwelling Pokémon stores electricity in its cheeks, so you'll feel a tingly shock if you touch it.",
-                game: "Let's Go Pikachu",
-              },
-            ],
-            baseStats: {
-              __typename: "StatsEntry",
-              hp: "hp 35",
-              attack: "attack 55",
-              defense: "defense 40",
-              speed: "speed 90",
-              specialattack: "special attack 50",
-              specialdefense: "special defense 50",
-            },
-            baseStatsTotal: "total 320",
-            evolutions: [
-              {
-                __typename: "DexDetails",
-                num: 26,
-                species: "raichu",
-                baseSpecies: null,
-              },
-              {
-                __typename: "DexDetails",
-                num: 26,
-                species: "raichu-alola",
-                baseSpecies: "Raichu",
-              },
-            ],
-            preevolutions: [
-              {
-                __typename: "DexDetails",
-                num: 172,
-                species: "pichu",
-                baseSpecies: null,
-              },
-            ],
-          },
-        },
-      },
-    },
-  ];
 
   afterEach(() => {
     cleanup();
@@ -141,6 +50,7 @@ describe("PokemonCard", () => {
     expectImages(getByTestId, ["sprite.jpg", "backSprite.jpg"]);
     expectGeneralValues(getByText);
     expectStats(getByText);
+    expectEggGroups(getByText);
     expectAbilities(getByText);
     expectEvolutions(getByText);
   });
@@ -196,6 +106,11 @@ const expectStats = (getByText: any) => {
   expect(getByText("special attack 50")).toBeTruthy();
   expect(getByText("special defense 50")).toBeTruthy();
   expect(getByText("total 320")).toBeTruthy();
+};
+
+const expectEggGroups = (getByText: any) => {
+  expect(getByText("Electric Egg")).toBeTruthy();
+  expect(getByText("Another Egg")).toBeTruthy();
 };
 
 const expectAbilities = (getByText: any) => {

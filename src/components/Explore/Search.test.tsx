@@ -10,6 +10,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 import { openPokemonScreen } from "../Navigation/rootNavigation";
 import { Search, SEARCH_POKEMON_QUERY } from "./Search";
+import { mocks } from "../../api/mockData";
 
 jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper");
 jest.mock("react-native/Libraries/LogBox/LogBox");
@@ -19,46 +20,6 @@ describe("Search", () => {
   let search: string = "25";
   const searchScreen = () => <Search search={search} />;
   const Tab = createBottomTabNavigator();
-  const mocks: MockedResponse<any>[] = [
-    {
-      request: {
-        query: SEARCH_POKEMON_QUERY,
-        variables: {
-          search: "rai",
-        },
-      },
-      result: {
-        data: {
-          getDexEntries: [
-            {
-              num: 26,
-              species: "Raichu",
-              baseSpecies: "",
-            },
-          ],
-        },
-      },
-    },
-    {
-      request: {
-        query: SEARCH_POKEMON_QUERY,
-        variables: {
-          search: "fire",
-        },
-      },
-      result: {
-        data: {
-          getDexEntries: [
-            {
-              num: 26,
-              species: "Raichu",
-              baseSpecies: "",
-            },
-          ],
-        },
-      },
-    },
-  ];
 
   afterEach(() => {
     cleanup();

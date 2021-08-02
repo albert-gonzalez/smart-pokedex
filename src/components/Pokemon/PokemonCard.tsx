@@ -65,6 +65,7 @@ export const GET_POKEMON_DETAILS_BY_NUM = gql`
         species
         baseSpecies
       }
+      eggGroups
     }
   }
 `;
