@@ -28,7 +28,7 @@ describe("PokemonCard", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <NavigationContainer>
-          <Tab.Navigator tabBarOptions={{}}>
+          <Tab.Navigator>
             <Tab.Screen name="Test" component={pokemonScreen} />
           </Tab.Navigator>
         </NavigationContainer>

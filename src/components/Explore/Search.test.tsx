@@ -29,7 +29,7 @@ describe("Search", () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <NavigationContainer>
-          <Tab.Navigator tabBarOptions={{}}>
+          <Tab.Navigator>
             <Tab.Screen name="Test" component={searchScreen} />
           </Tab.Navigator>
         </NavigationContainer>

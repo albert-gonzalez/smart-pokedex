@@ -30,12 +30,13 @@ export default function App() {
       <NavigationContainer ref={navigationRef}>
         <Header />
         <Tab.Navigator
-          tabBarOptions={{
-            activeBackgroundColor: colors.stickyBgColor,
-            inactiveBackgroundColor: colors.background,
-            activeTintColor: colors.text,
-            style: { borderTopColor: colors.shadow },
-            showLabel: false,
+          screenOptions={{
+            tabBarActiveBackgroundColor: colors.stickyBgColor,
+            tabBarInactiveBackgroundColor: colors.background,
+            tabBarActiveTintColor: colors.text,
+            tabBarStyle: { borderTopColor: colors.shadow },
+            tabBarShowLabel: false,
+            headerShown: false
           }}
           sceneContainerStyle={{
             backgroundColor: colors.background,
