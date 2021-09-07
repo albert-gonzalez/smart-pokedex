@@ -7,6 +7,7 @@ import { SectionListData, Text } from "react-native";
 import { StyleSheet, View } from "react-native";
 import {
   filterPokemonByNumAndMapToItem,
+  filterPokemonByTypeAndMapToItem,
   filterValidPokemonAndMapToItem,
   mapGenerationsToSections,
 } from "../../mappers/pokemon";
@@ -87,19 +88,27 @@ export const Search = ({ search }: SearchInput) => {
     );
   if (!data) return <Loading />;
 
-  /* EXERCISE 3. FILTER THE POKEMON LIST BY TYPE AND CONCATENATE queryResults WITH THIS FILTERED LIST */
+  let pokemonByType: Item[] = [];
 
-  const queryResults: SectionListData<Item>[] = [
+  if (search.length > 1) {
+    pokemonByType = filterPokemonByTypeAndMapToItem(
+      pokemonGenerations,
+      search,
+      openPokemon
+    );
+  }
+
+  const queryResultsAndPokemonByType: SectionListData<Item>[] = [
     {
       title: "Results",
       data: filterValidPokemonAndMapToItem(
         data.getDexEntries as unknown as Pokemon[],
         openPokemon
-      ),
+      ).concat(pokemonByType),
     },
   ];
 
-  return renderPokemonList(queryResults);
+  return renderPokemonList(queryResultsAndPokemonByType);
 };
 
 const renderPokemonList = (pokemon: SectionListData<Item>[]) => (

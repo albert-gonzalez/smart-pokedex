@@ -74,11 +74,13 @@ describe("Search", () => {
 
   test("filters by type if the search is a type and the result is concatenated with the graphql search", async () => {
     search = "fire"; // THE MOCKED GRAPHQL REQUEST RETURNS RAICHU WITH "fire" SEARCH
-    const { getByTestId, getByText } = renderSearch();
+    const { getByTestId, queryByText } = renderSearch();
 
     await waitFor(() => expect(getByTestId("search")).toBeTruthy());
 
-    // EXERCISE 3. YOUR EXPECTS HERE
+    expect(queryByText("1. Bulbasaur")).toBeNull();
+    expect(queryByText("4. Charmander")).toBeTruthy();
+    expect(queryByText("26. Raichu")).toBeTruthy();
   });
 
   test("opens the pokemon screen when a element of the list is pressed", async () => {
