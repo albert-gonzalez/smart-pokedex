@@ -5,10 +5,10 @@ import {
   render,
   waitFor,
 } from "@testing-library/react-native";
-import { GET_POKEMON_DETAILS_BY_NUM, PokemonCard } from "./PokemonCard";
+import { PokemonCard } from "./PokemonCard";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MockedProvider, MockedResponse } from "@apollo/client/testing";
+import { MockedProvider } from "@apollo/client/testing";
 import { openPokemonScreen } from "../Navigation/rootNavigation";
 import { mocks } from "../../api/mockData";
 
