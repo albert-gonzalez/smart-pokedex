@@ -43,53 +43,53 @@ describe("Search", () => {
   });
   test("shows all pokemon if the search is empty", async () => {
     search = "";
-    const { getByTestId, getByText } = renderSearch();
+    const { getByTestId, queryByText } = renderSearch();
 
     await waitFor(() => expect(getByTestId("search")).toBeTruthy());
 
-    expect(getByText("1. Bulbasaur")).toBeTruthy();
-    expect(getByText("4. Charmander")).toBeTruthy();
-    expect(getByText("7. Squirtle")).toBeTruthy();
+    expect(queryByText("1. Bulbasaur")).toBeTruthy();
+    expect(queryByText("4. Charmander")).toBeTruthy();
+    expect(queryByText("7. Squirtle")).toBeTruthy();
   });
 
   test("filters by number if the search is a number", async () => {
     search = "25";
-    const { getByTestId, getByText } = renderSearch();
+    const { getByTestId, queryByText } = renderSearch();
 
     await waitFor(() => expect(getByTestId("search")).toBeTruthy());
 
-    expect(() => getByText("1. Bulbasaur")).toThrowError();
-    expect(getByText("25. Pikachu")).toBeTruthy();
+    expect(queryByText("1. Bulbasaur")).toBeNull();
+    expect(queryByText("25. Pikachu")).toBeTruthy();
   });
 
   test("filters by name if the search is a string", async () => {
     search = "rai";
-    const { getByTestId, getByText } = renderSearch();
+    const { getByTestId, queryByText } = renderSearch();
 
     await waitFor(() => expect(getByTestId("search")).toBeTruthy());
 
-    expect(() => getByText("1. Bulbasaur")).toThrowError();
-    expect(getByText("26. Raichu")).toBeTruthy();
+    expect(queryByText("1. Bulbasaur")).toBeNull();
+    expect(queryByText("26. Raichu")).toBeTruthy();
   });
 
   test("filters by type if the search is a type and the result is concatenated with the graphql search", async () => {
     search = "fire";
-    const { getByTestId, getByText } = renderSearch();
+    const { getByTestId, queryByText } = renderSearch();
 
     await waitFor(() => expect(getByTestId("search")).toBeTruthy());
 
-    expect(() => getByText("1. Bulbasaur")).toThrowError();
-    expect(getByText("4. Charmander")).toBeTruthy();
-    expect(getByText("26. Raichu")).toBeTruthy();
+    expect(queryByText("1. Bulbasaur")).toBeNull();
+    expect(queryByText("4. Charmander")).toBeTruthy();
+    expect(queryByText("26. Raichu")).toBeTruthy();
   });
 
   test("opens the pokemon screen when a element of the list is pressed", async () => {
     search = "26";
-    const { getByTestId, getByText } = renderSearch();
+    const { getByTestId, queryByText } = renderSearch();
 
     await waitFor(() => expect(getByTestId("search")).toBeTruthy());
 
-    fireEvent.press(getByText("26. Raichu"));
+    fireEvent.press(queryByText("26. Raichu"));
 
     expect(openPokemonScreen).toHaveBeenCalledWith(26, expect.anything());
   });
