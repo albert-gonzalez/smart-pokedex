@@ -1,4 +1,4 @@
-import { DexDetails } from "@favware/graphql-pokemon";
+import { DexDetails } from "@favware/graphql-pokemon/generated/ts/graphql-pokemon";
 import { SectionListData } from "react-native";
 import { mapPokemonToItem } from "../../mappers/pokemon";
 import { Item } from "../List/SectionList";
