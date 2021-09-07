@@ -49,7 +49,9 @@ export const Search = ({ search }: SearchInput) => {
     }
   );
 
-  /* EXERCISE 1. SHOW A LIST WITH ALL OF THE POKÉMON IF THE SEARCH IS EMPTY */
+  if (search.length < 1) {
+    return renderPokemonList(allPokemon);
+  }
 
   const numberSearch = parseInt(search);
 

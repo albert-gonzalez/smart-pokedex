@@ -43,11 +43,13 @@ describe("Search", () => {
   });
   test("shows all pokemon if the search is empty", async () => {
     search = "";
-    // const { getByTestId, getByText } = renderSearch();
+    const { getByTestId, getByText } = renderSearch();
 
-    // await waitFor(() => expect(getByTestId("search")).toBeTruthy());
+    await waitFor(() => expect(getByTestId("search")).toBeTruthy());
 
-    // EXERCISE 1. UNCOMMENT THE CODE ABOVE AND WRITE YOUR EXPECTS HERE
+    expect(getByText("1. Bulbasaur")).toBeTruthy();
+    expect(getByText("4. Charmander")).toBeTruthy();
+    expect(getByText("7. Squirtle")).toBeTruthy();
   });
 
   test("filters by number if the search is a number", async () => {
