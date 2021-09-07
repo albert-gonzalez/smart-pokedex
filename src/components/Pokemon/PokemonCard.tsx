@@ -19,6 +19,7 @@ import { commonStyles } from "../../styles/common";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { getPokemonData } from "./Data";
 import { openPokemonScreen } from "../Navigation/rootNavigation";
+import { getNameWithNum } from "../../mappers/pokemon";
 
 export const GET_POKEMON_DETAILS_BY_NUM = gql`
   query Pokemon($num: Int!) {
@@ -135,7 +136,9 @@ export const PokemonCard = ({ num, title }: PokemonCardInput) => {
         <View style={styles.imageButtons}>
           {/* EXERCISE 4. IMAGE BUTTONS SHOULD BE HERE - TEST IDs should be "normalImageButton" FOR NORMAL BUTTON AND "shinyImageButton" FOR SHINY BUTTON */}
         </View>
-        {/* EXERCISE 2. NUM AND ID SHOULD BE HERE - TEST ID SHOULD BE "species" */}
+        <Text testID="species" style={styles.species}>
+          {getNameWithNum(pokemon)}
+        </Text>
         <FlavorTexts flavorTexts={pokemon.flavorTexts} />
       </View>
       <SectionList sections={list} />

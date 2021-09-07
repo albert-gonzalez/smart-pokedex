@@ -46,7 +46,7 @@ describe("PokemonCard", () => {
 
     await waitFor(() => expect(getByTestId("pokemonCard")).toBeTruthy());
 
-    // EXERCISE 2. ADD SPECIES EXPECT HERE
+    expect(getByText("25. pikachu")).toBeTruthy();
     expect(getByText("When Pikachu meet..."));
     expectImages(getByTestId, ["sprite.jpg", "backSprite.jpg"]);
     expectGeneralValues(getByText);
