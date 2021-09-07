@@ -1,5 +1,5 @@
 import React from "react";
-import { FlavorEntry } from "@favware/graphql-pokemon";
+import { FlavorEntry } from "@favware/graphql-pokemon/generated/ts/graphql-pokemon";
 import { Text, View } from "react-native";
 import { Card } from "../Card/Card";
 import { StyleSheet } from "react-native";

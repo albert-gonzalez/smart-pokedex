@@ -10,7 +10,7 @@ import {
   View,
 } from "react-native";
 import { useQuery, gql } from "@apollo/client";
-import type { Query } from "@favware/graphql-pokemon";
+import type { Query } from "@favware/graphql-pokemon/generated/ts/graphql-pokemon";
 import { Item, SectionList } from "../List/SectionList";
 import { colors, fontSizes } from "../../styles/variables";
 import { FlavorTexts } from "./FlavorTexts";

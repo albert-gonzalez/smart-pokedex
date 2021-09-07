@@ -1,5 +1,5 @@
 import { gql, useLazyQuery } from "@apollo/client";
-import { Query } from "@favware/graphql-pokemon";
+import { Query } from "@favware/graphql-pokemon/generated/ts/graphql-pokemon";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { useMemo } from "react";

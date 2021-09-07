@@ -1,4 +1,7 @@
-import { DexDetails, DexEntry } from "@favware/graphql-pokemon";
+import {
+  DexDetails,
+  DexEntry,
+} from "@favware/graphql-pokemon/generated/ts/graphql-pokemon";
 import { Item } from "../components/List/SectionList";
 import { Pokemon, PokemonGeneration } from "../components/Pokemon/Data";
 
