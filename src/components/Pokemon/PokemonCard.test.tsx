@@ -72,7 +72,16 @@ describe("PokemonCard", () => {
 
     await waitFor(() => expect(getByTestId("pokemonCard")).toBeTruthy());
 
-    // EXERCISE 4. YOUR BUTTONS TEST HERE. YOU CAN USE THE expectImages helper function
+    const shinyButton = getByTestId("shinyImageButton");
+    const normalButton = getByTestId("normalImageButton");
+
+    fireEvent.press(shinyButton);
+
+    expectImages(getByTestId, ["shinySprite.jpg", "shinyBackSprite.jpg"]);
+
+    fireEvent.press(normalButton);
+
+    expectImages(getByTestId, ["sprite.jpg", "backSprite.jpg"]);
   });
 });
 

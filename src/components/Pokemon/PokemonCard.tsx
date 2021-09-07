@@ -78,6 +78,7 @@ export const PokemonCard = ({ num, title }: PokemonCardInput) => {
   const navigator = useNavigation() as any;
   const ref: React.MutableRefObject<ScrollView> = React.useRef(null) as any;
   const isFocused = useIsFocused();
+  const [normalImageSelected, setNormalImageSelected] = useState(true);
 
   if (!isFocused) {
     ref.current?.scrollTo({ y: 0 });
@@ -122,19 +123,48 @@ export const PokemonCard = ({ num, title }: PokemonCardInput) => {
             testID="image"
             style={styles.image}
             source={{
-              uri: pokemon.sprite,
+              uri: normalImageSelected ? pokemon.sprite : pokemon.shinySprite,
             }}
           />
           <Image
             testID="backImage"
             style={styles.image}
             source={{
-              uri: pokemon.backSprite,
+              uri: normalImageSelected
+                ? pokemon.backSprite
+                : pokemon.shinyBackSprite,
             }}
           />
         </View>
         <View style={styles.imageButtons}>
-          {/* EXERCISE 4. IMAGE BUTTONS SHOULD BE HERE - TEST IDs should be "normalImageButton" FOR NORMAL BUTTON AND "shinyImageButton" FOR SHINY BUTTON */}
+          <TouchableHighlight
+            testID="normalImageButton"
+            underlayColor="rgba(255, 255, 255, 0.2)"
+            onPress={() => setNormalImageSelected(true)}
+          >
+            <Text
+              style={[
+                styles.normalImageButton,
+                normalImageSelected ? styles.selectedButton : {},
+              ]}
+            >
+              Normal
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            testID="shinyImageButton"
+            underlayColor="rgba(255, 255, 255, 0.2)"
+            onPress={() => setNormalImageSelected(false)}
+          >
+            <Text
+              style={[
+                styles.shinyImageButton,
+                !normalImageSelected ? styles.selectedButton : {},
+              ]}
+            >
+              Shiny
+            </Text>
+          </TouchableHighlight>
         </View>
         <Text testID="species" style={styles.species}>
           {getNameWithNum(pokemon)}
