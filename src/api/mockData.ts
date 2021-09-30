@@ -12,7 +12,7 @@ export const mocks: MockedResponse<any>[] = [
     },
     result: {
       data: {
-        getPokemonDetailsByNumber: {
+        getPokemonByDexNumber: {
           __typename: "DexDetails",
           sprite: "sprite.jpg",
           backSprite: "backSprite.jpg",
@@ -103,7 +103,7 @@ export const mocks: MockedResponse<any>[] = [
     },
     result: {
       data: {
-        getDexEntries: [
+        getFuzzyPokemon: [
           {
             num: 26,
             species: "Raichu",
@@ -122,7 +122,7 @@ export const mocks: MockedResponse<any>[] = [
     },
     result: {
       data: {
-        getDexEntries: [
+        getFuzzyPokemon: [
           {
             num: 26,
             species: "Raichu",
