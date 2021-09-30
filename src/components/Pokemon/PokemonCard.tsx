@@ -24,7 +24,11 @@ import { useEffect } from "react";
 
 export const GET_POKEMON_DETAILS_BY_NUM = gql`
   query Pokemon($num: Int!) {
-    getPokemonDetailsByNumber(pokemon: $num, skip: 0, take: 4, reverse: true) {
+    getPokemonByDexNumber(
+      number: $num
+      reverseFlavorTexts: true
+      takeFlavorTexts: 4
+    ) {
       sprite
       backSprite
       shinySprite
@@ -105,7 +109,7 @@ export const PokemonCard = ({ num, title }: PokemonCardInput) => {
     return <Text style={commonStyles.scrollView}>Error! Empty Data</Text>;
   }
 
-  const pokemon = data.getPokemonDetailsByNumber;
+  const pokemon = data.getPokemonByDexNumber;
 
   const list: SectionListData<Item>[] = getPokemonData(pokemon, (number) =>
     openPokemonScreen(number, navigator)
