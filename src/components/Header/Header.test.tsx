@@ -3,6 +3,7 @@ import { render, fireEvent } from "@testing-library/react-native";
 import { Header } from "./Header";
 import * as rootNavigation from "../Navigation/rootNavigation";
 import { Routes } from "../Navigation/routes";
+import "core-js";
 
 jest.mock("../Navigation/rootNavigation.ts");
 
