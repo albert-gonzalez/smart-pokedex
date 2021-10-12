@@ -2,7 +2,7 @@ import { HEADER_SEARCH, LIST, LIST_ELEMENTS } from "../screens/common";
 import { TAB_EXPLORE } from "../screens/explore";
 import { SPECIES } from "../screens/pokemon";
 
-const THROTTLE_TIME = 500;
+const THROTTLE_TIME = 600;
 
 describe("Search", () => {
   beforeEach(() => {
@@ -73,7 +73,7 @@ const onExploreScreenTypeAndWaitForResults = (search: string) => {
 };
 
 const assertCharmSearch = () => {
-  cy.get(LIST_ELEMENTS).should("have.length.below", 11);
+  cy.get(LIST_ELEMENTS).should("have.length.below", 15);
   cy.get(LIST).contains("4. charmander").should("exist");
   cy.get(LIST).contains("5. charmeleon").should("exist");
   cy.get(LIST).contains("6. charizard").should("exist");
