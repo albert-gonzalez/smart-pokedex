@@ -11,6 +11,7 @@ import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 import { openPokemonScreen } from "../Navigation/rootNavigation";
 import { Search, SEARCH_POKEMON_QUERY } from "./Search";
 import { mocks } from "../../api/mockData";
+import "core-js";
 
 jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper");
 jest.mock("react-native/Libraries/LogBox/LogBox");
