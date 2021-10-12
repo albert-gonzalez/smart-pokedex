@@ -2,6 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react-native";
 import { Card } from "./Card";
 import { Text } from "react-native";
+import "core-js";
 
 describe("Card", () => {
   test("renders correctly", () => {

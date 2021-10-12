@@ -14,6 +14,7 @@ import { PokemonOfTheDay } from "./PokemonOfTheDay";
 import { clear, getItem, setItem } from "../../storage/storage";
 import MockDate from "mockdate";
 import { mocks } from "../../api/mockData";
+import "core-js";
 
 jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper");
 jest.mock("react-native/Libraries/LogBox/LogBox");
