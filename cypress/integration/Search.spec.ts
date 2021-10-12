@@ -46,7 +46,7 @@ describe("Search", () => {
 
     it("does not search if the search is not submitted", () => {
       cy.get(HEADER_SEARCH).type("charm");
-      cy.wait(500);
+      cy.wait(600);
       cy.get(LIST).contains("4. charmander").should("not.exist");
     });
   });
@@ -55,12 +55,12 @@ describe("Search", () => {
 const onExploreScreenTypeAndWaitForResults = (search: string) => {
   cy.get(TAB_EXPLORE).click();
   cy.get(HEADER_SEARCH).type(search);
-  cy.wait(500);
+  cy.wait(600);
   cy.get(LIST).contains("Results").should("exist");
 };
 
 const assertCharmSearch = () => {
-  cy.get(LIST_ELEMENTS).should("have.length.below", 11);
+  cy.get(LIST_ELEMENTS).should("have.length.below", 15);
   cy.get(LIST).contains("4. charmander").should("exist");
   cy.get(LIST).contains("5. charmeleon").should("exist");
   cy.get(LIST).contains("6. charizard").should("exist");
