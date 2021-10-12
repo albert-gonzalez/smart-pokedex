@@ -24,7 +24,7 @@ interface SearchInput {
 
 export const SEARCH_POKEMON_QUERY = gql`
   query ($search: String!) {
-    getDexEntries(pokemon: $search, reverse: true, take: 20) {
+    getFuzzyPokemon(pokemon: $search, reverse: true, take: 20) {
       num
       species
       baseSpecies
@@ -102,7 +102,7 @@ export const Search = ({ search }: SearchInput) => {
     {
       title: "Results",
       data: filterValidPokemonAndMapToItem(
-        data.getDexEntries as unknown as Pokemon[],
+        data.getFuzzyPokemon as unknown as Pokemon[],
         openPokemon
       ).concat(pokemonByType),
     },
