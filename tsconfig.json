@@ -2,6 +2,7 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
-    "types": ["jest", "cypress"]
+    "types": ["jest", "cypress"],
+    "jsx": "preserve"
   }
 }

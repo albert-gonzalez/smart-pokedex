@@ -24,7 +24,7 @@ interface SearchInput {
 
 export const SEARCH_POKEMON_QUERY = gql`
   query ($search: String!) {
-    getFuzzyPokemon(pokemon: $search, reverse: true, take: 20) {
+    getFuzzyPokemon(pokemon: $search, reverse: false, take: 20) {
       num
       species
       baseSpecies

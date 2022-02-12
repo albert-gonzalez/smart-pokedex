@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StatusBar, StyleSheet } from "react-native";
+import { StatusBar, StyleSheet, AppRegistry } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { client } from "./src/api/apolloClient";
@@ -82,6 +82,8 @@ export default function App() {
     </ApolloProvider>
   );
 }
+
+AppRegistry.registerComponent('SmartPokedex', () => App);
 
 const styles = StyleSheet.create({
   icon: { width: 32, height: 32 },
