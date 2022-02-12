@@ -13,13 +13,12 @@ import { Search, SEARCH_POKEMON_QUERY } from "./Search";
 import { mocks } from "../../api/mockData";
 import "core-js";
 
-jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper");
 jest.mock("react-native/Libraries/LogBox/LogBox");
 jest.mock("../Navigation/rootNavigation.ts");
 
 describe("Search", () => {
   let search: string = "25";
-  const searchScreen = () => <Search search={search} />;
+  const SearchScreen = () => <Search search={search} />;
   const Tab = createBottomTabNavigator();
 
   afterEach(() => {
@@ -31,7 +30,7 @@ describe("Search", () => {
       <MockedProvider mocks={mocks} addTypename={false}>
         <NavigationContainer>
           <Tab.Navigator>
-            <Tab.Screen name="Test" component={searchScreen} />
+            <Tab.Screen name="Test" component={SearchScreen} />
           </Tab.Navigator>
         </NavigationContainer>
       </MockedProvider>

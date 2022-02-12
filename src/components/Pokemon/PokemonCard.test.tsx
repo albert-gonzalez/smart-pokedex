@@ -13,12 +13,11 @@ import { openPokemonScreen } from "../Navigation/rootNavigation";
 import { mocks } from "../../api/mockData";
 import "core-js";
 
-jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper");
 jest.mock("react-native/Libraries/LogBox/LogBox");
 jest.mock("../Navigation/rootNavigation.ts");
 
 describe("PokemonCard", () => {
-  const pokemonScreen = () => <PokemonCard num={25} />;
+  const PokemonScreen = () => <PokemonCard num={25} />;
   const Tab = createBottomTabNavigator();
 
   afterEach(() => {
@@ -30,7 +29,7 @@ describe("PokemonCard", () => {
       <MockedProvider mocks={mocks} addTypename={false}>
         <NavigationContainer>
           <Tab.Navigator>
-            <Tab.Screen name="Test" component={pokemonScreen} />
+            <Tab.Screen name="Test" component={PokemonScreen} />
           </Tab.Navigator>
         </NavigationContainer>
       </MockedProvider>

@@ -16,13 +16,12 @@ import MockDate from "mockdate";
 import { mocks } from "../../api/mockData";
 import "core-js";
 
-jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper");
 jest.mock("react-native/Libraries/LogBox/LogBox");
 jest.mock("../Navigation/rootNavigation.ts");
 jest.mock("../../storage/storage.ts");
 
 describe("PokemonOfTheDay", () => {
-  const pokemonScreen = () => <PokemonOfTheDay />;
+  const PokemonScreen = () => <PokemonOfTheDay />;
   const originalRandom = Math.random;
   const Tab = createBottomTabNavigator();
 
@@ -43,7 +42,7 @@ describe("PokemonOfTheDay", () => {
       <MockedProvider mocks={mocks} addTypename={false}>
         <NavigationContainer>
           <Tab.Navigator>
-            <Tab.Screen name="Test" component={pokemonScreen} />
+            <Tab.Screen name="Test" component={PokemonScreen} />
           </Tab.Navigator>
         </NavigationContainer>
       </MockedProvider>
