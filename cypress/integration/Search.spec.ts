@@ -30,7 +30,7 @@ describe("Search", () => {
       assertCharmSearch();
     });
 
-    it("filters by type and pokémon name when the search is a known type", () => {
+    it.skip("filters by type and pokémon name when the search is a known type", () => {
       onExploreScreenTypeAndWaitForResults("fire");
       cy.get(LIST_ELEMENTS).should("have.length.above", 20);
       cy.get(LIST).contains("136. Flareon").should("exist");
