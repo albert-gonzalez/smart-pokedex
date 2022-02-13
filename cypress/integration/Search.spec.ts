@@ -33,7 +33,7 @@ describe("Search", () => {
     it("filters by type and pokémon name when the search is a known type", () => {
       onExploreScreenTypeAndWaitForResults("fire");
       cy.get(LIST_ELEMENTS).should("have.length.above", 20);
-      cy.get(LIST).contains("195. quagsire").should("exist");
+      cy.get(LIST).contains("136. Flareon").should("exist");
       cy.get(LIST).contains("4. Charmander").should("exist");
     });
   });
