@@ -11,7 +11,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MockedProvider } from "@apollo/client/testing";
 import { openPokemonScreen } from "../Navigation/rootNavigation";
 import { mocks } from "../../api/mockData";
-import "core-js";
 
 jest.mock("react-native/Libraries/LogBox/LogBox");
 jest.mock("../Navigation/rootNavigation.ts");
